@@ -16,17 +16,17 @@ pipeline{
         stage('Test') {
             agent {
                 docker {
-                    image 'qnib/pytest'
+                    image 'python:alpine'
                 }
             }
             steps {
-                sh 'py.test --junit-xml test-reports/results.xml src/appTest.py'
+                sh 'python -m pytest -v --junit-xml test_results.xml src/appTest.py'
             }
-            post {
-                always {
-                    junit 'test-reports/results.xml'
-                }
-            }
+            // post {
+            //     always {
+            //         junit 'test-reports/results.xml'
+            //     }
+            // }
         }
     }
 }
