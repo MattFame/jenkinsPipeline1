@@ -30,6 +30,10 @@ def init_phonebook_db():
     """
     cursor.execute(phonebook_table)
 
+
+def insert_mock_name(name, number):
+    return f'Person {name.strip().title()} added to Phonebook successfully'
+    
 # Write a function named `insert_person` which inserts person into the phonebook table in the db,
 # and returns text info about result of the operation
 def insert_person(name, number):
