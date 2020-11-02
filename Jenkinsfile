@@ -14,8 +14,7 @@ pipeline{
                     sh 'pip install --user -r requirements.txt'
                     sh 'python -m py_compile src/*.py'
                     stash(name: 'compiled-results', includes: 'src/*.py*')
-                //}
-                
+                //}   
             }
         }
         stage('Test') {
