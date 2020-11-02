@@ -7,9 +7,9 @@ import os
 app = Flask(__name__)
 
 # Configure mysql database
-app.config['MYSQL_DATABASE_HOST'] = os.getenv('MYSQL_DATABASE_HOST')
-app.config['MYSQL_DATABASE_PASSWORD'] = os.getenv('MYSQL_DATABASE_PASSWORD')
-app.config['MYSQL_DATABASE_DB'] = os.getenv('MYSQL_DATABASE_DB')
+app.config['MYSQL_DATABASE_HOST'] = "database-42.cbanmzptkrzf.us-east-1.rds.amazonaws.com"  # os.getenv('MYSQL_DATABASE_HOST')
+app.config['MYSQL_DATABASE_PASSWORD'] = "Clarusway"  # os.getenv('MYSQL_DATABASE_PASSWORD')
+app.config['MYSQL_DATABASE_DB'] = "phonebook"  # os.getenv('MYSQL_DATABASE_DB')
 app.config['MYSQL_DATABASE_PORT'] = 3306
 mysql = MySQL()
 mysql.init_app(app) 
@@ -40,7 +40,7 @@ def insert_person(name, number):
     query = f"""
     SELECT * FROM phonebook WHERE name like '{name.strip().lower()}';
     """
-    
+
     cursor.execute(query)
     row = cursor.fetchone()
     if row is not None:
