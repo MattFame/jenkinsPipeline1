@@ -11,6 +11,7 @@ pipeline{
                 echo 'python version command will run...'
                 sh 'python --version'
             }
+            
         }
     }
 }
