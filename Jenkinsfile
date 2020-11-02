@@ -7,13 +7,10 @@ pipeline{
                     image 'python:alpine'
                 }
             }
-            
             steps{
                 echo 'python version command will run...'
                 sh 'python --version'
             }
         }
-        
     }
-
 }
