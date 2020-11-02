@@ -5,7 +5,6 @@ pipeline{
             agent{
                 docker{
                     image 'python:alpine'
-                    label "python00"
                 }
             }
             steps{
@@ -21,7 +20,6 @@ pipeline{
             agent {
                 docker {
                     image 'python:alpine'
-                    label "python01"
                 }
             }
             steps {
