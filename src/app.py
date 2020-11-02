@@ -40,6 +40,7 @@ def insert_person(name, number):
     query = f"""
     SELECT * FROM phonebook WHERE name like '{name.strip().lower()}';
     """
+    
     cursor.execute(query)
     row = cursor.fetchone()
     if row is not None:
