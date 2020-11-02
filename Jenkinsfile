@@ -9,8 +9,12 @@ pipeline{
             }
             steps{
                 echo 'building...'
-                sh 'python -m py_compile src/*.py'
-                stash(name: 'compiled-results', includes: 'src/*.py*')
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    sh 'pip install --user -r requirements.txt'
+                    sh 'python -m py_compile src/*.py'
+                    stash(name: 'compiled-results', includes: 'src/*.py*')
+                }
+                
             }
         }
         stage('Test') {
