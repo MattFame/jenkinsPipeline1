@@ -30,10 +30,10 @@ def init_phonebook_db():
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
     """
     cursor.execute(phonebook_table)
-    
+
 
 def insert_mock_name(name, number):
-    return 'Person ' + name.strip().title() + 'added to Phonebook successfully'
+    return 'Person ' + name.strip().title() + ' added to Phonebook successfully'
 
 # Write a function named `insert_person` which inserts person into the phonebook table in the db,
 # and returns text info about result of the operation
