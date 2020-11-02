@@ -31,7 +31,6 @@ def init_phonebook_db():
     """
     cursor.execute(phonebook_table)
 
-
 def insert_mock_name(name, number):
     return 'Person ' + name.strip().title() + 'added to Phonebook successfully'
 
