@@ -21,14 +21,16 @@ pipeline{
                 }
             }
             steps {
-                sh 'pip install pytest'
-                sh 'python -m pytest -v --junit-xml test_results.xml src/appTest.py'
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    sh 'pip install pytest'
+                    sh 'python -m pytest -v --junit-xml test_results.xml src/appTest.py'
+                }
             }
-            // post {
-            //     always {
-            //         junit 'test-reports/results.xml'
-            //     }
-            // }
+            post {
+                always {
+                    junit 'test_results.xml'
+                }
+            }
         }
     }
 }
