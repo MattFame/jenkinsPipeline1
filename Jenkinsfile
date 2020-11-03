@@ -8,7 +8,7 @@ pipeline{
         MYSQL_DATABASE_PORT = 3306
     }
     stages{
-        stage("build"){
+        stage("compile"){
             agent{
                 docker{
                     image 'python:alpine'
@@ -20,12 +20,12 @@ pipeline{
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     //sh 'pip install -r requirements.txt'
                     sh 'python -m py_compile src/*.py'
-                    stash(name: 'compiled', includes: 'src/*.py*')
+                    stash(name: 'compilation_result', includes: 'src/*.py*')
                 }   
             }
         }
 
-        stage('Test') {
+        stage('test') {
             agent {
                 docker {
                     image 'python:alpine'
@@ -47,6 +47,26 @@ pipeline{
             post {
                 always {
                     junit 'results.xml'
+                }
+            }
+        }
+
+        stage('deliver') {
+            agent any
+            environment {
+                VOLUME = '$(pwd)/src:/src'
+                IMAGE = 'cdrx/pyinstaller-linux:python2'
+            }
+            steps {
+                dir(path: env.BUILD_ID) {     
+                    unstash(name: 'compilation_result')       
+                    sh "docker run -v ${VOLUME} ${IMAGE} 'pyinstaller -F app.py'"  
+                }
+            }
+            post {
+                success {
+                    archiveArtifacts "${env.BUILD_ID}/src/dist/app"     
+                    //sh "docker run -v ${VOLUME} ${IMAGE} 'rm -rf build dist'"
                 }
             }
         }
