@@ -35,7 +35,7 @@ pipeline{
                     echo "echoing... $HOME" //both are the same
                     sh "echo ${HOME}"
                     sh "printenv"
-                    sh 'python -m pytest -v --junit-xml test_results.xml src/appTest.py'
+                    sh 'python -m pytest -v --junit-xml results.xml src/appTest.py'
                 }
             }
             post {
