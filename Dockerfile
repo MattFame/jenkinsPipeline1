@@ -1,6 +1,6 @@
 FROM python:alpine
-COPY . /app
-WORKDIR /app
+COPY . /src
+WORKDIR /src
 
 ENV MYSQL_DATABASE_HOST database
 ENV MYSQL_DATABASE_USER clarusway
