@@ -16,7 +16,7 @@ pipeline{
                 }   
             }
         }
-        
+
         stage('Test') {
             agent {
                 docker {
@@ -26,6 +26,8 @@ pipeline{
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     //sh 'pip install --user -r requirements.txt'
+                    echo "$HOME"
+                    sh "printenv"
                     sh 'python -m pytest -v --junit-xml test_results.xml src/appTest.py'
                 }
             }
