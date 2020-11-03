@@ -11,7 +11,7 @@ app.config['MYSQL_DATABASE_HOST'] =  os.getenv('MYSQL_DATABASE_HOST')  # "databa
 app.config['MYSQL_DATABASE_PASSWORD'] = os.getenv('MYSQL_DATABASE_PASSWORD')  # "Clarusway"
 app.config['MYSQL_DATABASE_USER'] = os.getenv('MYSQL_DATABASE_USER')  # 'admin'
 app.config['MYSQL_DATABASE_DB'] = os.getenv('MYSQL_DATABASE_DB')  # "phonebook"
-app.config['MYSQL_DATABASE_PORT'] = os.getenv('MYSQL_DATABASE_PORT')  # 3306
+app.config['MYSQL_DATABASE_PORT'] = int(os.getenv('MYSQL_DATABASE_PORT'))  # 3306
 mysql = MySQL()
 mysql.init_app(app) 
 connection = mysql.connect()
