@@ -63,6 +63,7 @@ pipeline{
                     sh "docker run -v ${VOLUME} ${IMAGE} 'pyinstaller -F src/app.py'"  
                 }
             }
+            
             post {
                 success {
                     archiveArtifacts "${env.BUILD_ID}/src/dist/app"     
