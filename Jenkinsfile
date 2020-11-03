@@ -32,7 +32,7 @@ pipeline{
 
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     //sh 'pip install -r requirements.txt'
-                    echo "echoing... $HOME" both are the same
+                    echo "echoing... $HOME" //both are the same
                     sh "echo ${HOME}"
                     sh "printenv"
                     sh 'python -m pytest -v --junit-xml test_results.xml src/appTest.py'
