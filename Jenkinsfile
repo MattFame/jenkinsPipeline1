@@ -55,7 +55,7 @@ pipeline{
             agent any
             environment {
                 VOLUME = '$(pwd)/src:/src'
-                IMAGE = 'cdrx/pyinstaller-linux:python2'
+                IMAGE = 'cdrx/pyinstaller-linux:python3'
             }
             steps {
                 dir(path: env.BUILD_ID) {     
@@ -66,7 +66,7 @@ pipeline{
             post {
                 success {
                     archiveArtifacts "${env.BUILD_ID}/src/dist/app"     
-                    //sh "docker run -v ${VOLUME} ${IMAGE} 'rm -rf build dist'"
+                    sh "docker run -v ${VOLUME} ${IMAGE}"  // 'rm -rf build dist'"
                 }
             }
         }
