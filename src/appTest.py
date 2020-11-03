@@ -1,6 +1,6 @@
 import unittest
 import app
-unittest.TestLoader.sortTestMethodsUsing = None
+# unittest.TestLoader.sortTestMethodsUsing = None
 
 class Test(unittest.TestCase):
     
