@@ -9,6 +9,7 @@ pipeline{
             }
             steps{
                 echo 'building...'
+                echo "$HOME"
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh 'pip install -r requirements.txt'
                     sh 'python -m py_compile src/*.py'
@@ -31,7 +32,7 @@ pipeline{
                     sh 'python -m pytest -v --junit-xml test_results.xml src/appTest.py'
                 }
             }
-            
+
             post {
                 always {
                     junit 'test_results.xml'
