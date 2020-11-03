@@ -63,7 +63,7 @@ pipeline{
         //             unstash(name: 'compilation_result')   
         //             sh "pwd"
         //             sh "ls"
-        //             sh "docker run -v ${VOLUME} ${IMAGE} 'pyinstaller -F app.py'"  
+        //             sh "docker run -rm -v ${VOLUME} ${IMAGE} 'pyinstaller -F app.py'"  
         //         }
         //     }
 
@@ -72,7 +72,7 @@ pipeline{
         //             sh "ls"
         //             sh "pwd"
         //             archiveArtifacts "${env.BUILD_ID}/src/dist/app"     
-        //             sh "docker run -v ${VOLUME} ${IMAGE} 'rm -rf build dist'"
+        //             sh "docker run -rm -v ${VOLUME} ${IMAGE} 'rm -rf build dist'"
         //         }
         //     }
         // }
