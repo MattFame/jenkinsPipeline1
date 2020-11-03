@@ -7,7 +7,6 @@ pipeline{
         MYSQL_DATABASE_DB = "phonebook"
         MYSQL_DATABASE_PORT = 3306
         PATH="/usr/local/bin/:${env.PATH}"
-        // PATH=sh(script:"echo $PATH:/usr/local/bin/", returnStdout:true).trim()
     }
     stages{
         stage("compile"){
@@ -90,6 +89,14 @@ pipeline{
             steps{
                 sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 046402772087.dkr.ecr.us-east-1.amazonaws.com"
                 sh "docker push 046402772087.dkr.ecr.us-east-1.amazonaws.com/matt/handson-jenkins:latest"
+            }
+        }
+
+        stage('compose'){
+            agent any
+            steps{
+                sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 046402772087.dkr.ecr.us-east-1.amazonaws.com"
+                sh "docker-compose up"
             }
         }
     }
