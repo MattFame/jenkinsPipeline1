@@ -25,14 +25,12 @@ pipeline{
                 }   
             }
         }
-
         stage('test') {
             agent {
                 docker {
                     image 'python:alpine'
                 }
             }
-
             steps {
                 // sh "echo $HOME"
                 // sh "echo ${HOME}"
