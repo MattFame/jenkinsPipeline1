@@ -51,30 +51,30 @@ pipeline{
             }
         }
 
-        stage('deliver') {
-            agent any
-            environment {
-                VOLUME = '$(pwd)/src:/src'
-                IMAGE = 'cdrx/pyinstaller-linux:python3'
-            }
-            steps {
-                dir(path: env.BUILD_ID) {     
-                    unstash(name: 'compilation_result')   
-                    sh "pwd"
-                    sh "ls"
-                    sh "docker run -v ${VOLUME} ${IMAGE} 'pyinstaller -F app.py'"  
-                }
-            }
+        // stage('deliver') {
+        //     agent any
+        //     environment {
+        //         VOLUME = '$(pwd)/src:/src'
+        //         IMAGE = 'cdrx/pyinstaller-linux:python3'
+        //     }
+        //     steps {
+        //         dir(path: env.BUILD_ID) {     
+        //             unstash(name: 'compilation_result')   
+        //             sh "pwd"
+        //             sh "ls"
+        //             sh "docker run -v ${VOLUME} ${IMAGE} 'pyinstaller -F app.py'"  
+        //         }
+        //     }
 
-            post {
-                success {
-                    sh "ls"
-                    sh "pwd"
-                    archiveArtifacts "${env.BUILD_ID}/src/dist/app"     
-                    sh "docker run -v ${VOLUME} ${IMAGE} 'rm -rf build dist'"
-                }
-            }
-        }
+        //     post {
+        //         success {
+        //             sh "ls"
+        //             sh "pwd"
+        //             archiveArtifacts "${env.BUILD_ID}/src/dist/app"     
+        //             sh "docker run -v ${VOLUME} ${IMAGE} 'rm -rf build dist'"
+        //         }
+        //     }
+        // }
 
         stage('build'){
             agent any
@@ -86,9 +86,7 @@ pipeline{
         stage('push'){
             agent any
             steps{
-                sh "PATH=$PATH:/usr/local/bin/"
-                sh "export $PATH"
-                sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 046402772087.dkr.ecr.us-east-1.amazonaws.com"
+                sh "/usr/local/bin/aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 046402772087.dkr.ecr.us-east-1.amazonaws.com"
                 sh "docker push 046402772087.dkr.ecr.us-east-1.amazonaws.com/matt/handson-jenkins:latest"
             }
         }
