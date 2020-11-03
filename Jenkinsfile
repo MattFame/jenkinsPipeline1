@@ -54,15 +54,15 @@ pipeline{
         stage('deliver') {
             agent any
             environment {
-                VOLUME = '$(pwd):/src'
+                VOLUME = '$(pwd)/src:/src'
                 IMAGE = 'cdrx/pyinstaller-linux:python3'
             }
             steps {
                 dir(path: env.BUILD_ID) {     
                     unstash(name: 'compilation_result')   
                     sh "pwd"
-                    sh "ls"    
-                    sh "docker run -v ${VOLUME} ${IMAGE} 'pyinstaller -F src/app.py'"  
+                    sh "ls"
+                    sh "docker run -v ${VOLUME} ${IMAGE} 'pyinstaller -F app.py'"  
                 }
             }
 
