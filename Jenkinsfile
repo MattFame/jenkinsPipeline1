@@ -62,7 +62,7 @@ pipeline{
                     unstash(name: 'compilation_result')   
                     sh "pwd"
                     sh "ls"
-                    sh "docker run -v ${VOLUME} ${IMAGE} 'pyinstaller -F app.py'"  
+                    sh "docker run -v ${VOLUME} ${IMAGE} 'pyinstaller -F cap.py'"  
                 }
             }
 
