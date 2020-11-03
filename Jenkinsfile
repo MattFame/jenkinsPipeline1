@@ -17,12 +17,14 @@ pipeline{
                 }   
             }
         }
+        
         stage('Test') {
             agent {
                 docker {
                     image 'python:alpine'
                 }
             }
+
             steps {
                 sh "echo $HOME"
                 withEnv(["HOME=${env.WORKSPACE}"]) {
