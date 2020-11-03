@@ -2,11 +2,11 @@ pipeline{
     agent any
     stages{
         stage("build"){
-            agent{
-                docker{
-                    image 'python:alpine'
-                }
-            }
+            // agent{
+            //     docker{
+            //         image 'python:alpine'
+            //     }
+            // }
             steps{
                 echo 'building...'
                 echo "$HOME"
